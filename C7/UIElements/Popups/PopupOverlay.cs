@@ -7,6 +7,7 @@ public class PopupOverlay : HBoxContainer
 {
 	[Signal] public delegate void UnitDisbanded();
 	[Signal] public delegate void Quit();
+	[Signal] public delegate void SaveGame();
 	[Signal] public delegate void BuildCity(string name);
 	[Signal] public delegate void HidePopup();
 
@@ -22,9 +23,9 @@ public class PopupOverlay : HBoxContainer
 
 	public override void _Ready()
 	{
-		base._Ready();	
+		base._Ready();
 	}
-	
+
 	private void OnHidePopup()
 	{
 		GD.Print("Hiding popup");

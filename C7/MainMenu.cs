@@ -1,6 +1,4 @@
 using Godot;
-using ConvertCiv3Media;
-using C7GameData;
 using System;
 
 public class MainMenu : Node2D
