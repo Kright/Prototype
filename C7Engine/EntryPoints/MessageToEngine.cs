@@ -54,6 +54,8 @@ namespace C7Engine
 					unit.fortify();
 				else
 					unit.wake();
+			} else {
+				Console.WriteLine("INVALID UNIT BAD: " + unitGUID);
 			}
 		}
 	}

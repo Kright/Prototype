@@ -22,6 +22,13 @@ namespace C7GameData
 
         public static City NONE = new City(Tile.NONE, null, "Dummy City");
 
+		public City()
+		{
+			location = NONE.location;
+			owner = NONE.owner;
+			name = NONE.name;
+		}
+
         public City(Tile location, Player owner, string name)
         {
             guid = Guid.NewGuid().ToString();
@@ -128,6 +135,6 @@ namespace C7GameData
 		{
 			return CurrentFoodYield() - size * 2;
 		}
-        
+
     }
 }

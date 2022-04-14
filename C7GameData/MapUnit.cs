@@ -5,6 +5,7 @@ namespace C7GameData
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
  * A unit on the map.  Not to be confused with a unit prototype.
@@ -29,9 +30,9 @@ public class MapUnit
 
 	public TileDirection facingDirection;
 
-	//This probably should not be serialized.  In .NET, we'd add the [ScriptIgnore] and using System.Web.Script.Serialization.
-	//But .NET Core doesn't support that.  So, we'll have to figure out something else.  Maybe a library somewhere.
+	[JsonIgnore]
 	public List<string> availableActions = new List<string>();
+
 	public UnitAIData currentAIData;
 
 	public MapUnit()
@@ -45,10 +46,9 @@ public class MapUnit
 
 	public override string ToString()
 	{
-		if (this != MapUnit.NONE) {
+		if (this != NONE) {
 			return unitType.name + " with " + movementPointsRemaining + " movement points and " + hitPointsRemaining + " hit points, guid = " + guid;
-		}
-		else {
+		} else {
 			return "This is the NONE unit";
 		}
 	}
@@ -60,8 +60,8 @@ public class MapUnit
 	public bool HasPriorityAsDefender(MapUnit otherDefender, MapUnit opponent)
 	{
 		Player opponentPlayer = opponent.owner;
-		bool weAreEnemy           = (opponentPlayer != null) ? ! opponentPlayer.IsAtPeaceWith(this.owner)          : false;
-		bool otherDefenderIsEnemy = (opponentPlayer != null) ? ! opponentPlayer.IsAtPeaceWith(otherDefender.owner) : false;
+		bool weAreEnemy           = opponentPlayer?.IsAtPeaceWith(this.owner) ?? false;
+		bool otherDefenderIsEnemy = opponentPlayer?.IsAtPeaceWith(otherDefender.owner) ?? false;
 		if (weAreEnemy && ! otherDefenderIsEnemy)
 			return true;
 		else if (otherDefenderIsEnemy && ! weAreEnemy)
