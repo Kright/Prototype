@@ -49,14 +49,10 @@ namespace C7Engine
 
 			// Simply do nothing if we weren't given a valid GUID. TODO: Maybe this is an error we need to handle? In an MP game, we should reject
 			// invalid actions at the server level but at the client level an invalid action received from the server indicates a desync.
-			if (unit != null) {
-				if (fortifyElseWake)
-					unit.fortify();
-				else
-					unit.wake();
-			} else {
-				Console.WriteLine("INVALID UNIT BAD: " + unitGUID);
-			}
+			if (fortifyElseWake)
+				unit?.fortify();
+			else
+				unit?.wake();
 		}
 	}
 
@@ -176,7 +172,7 @@ namespace C7Engine
 			Player controller = EngineStorage.gameData.players.Find(p => p.guid == EngineStorage.uiControllerID);
 
 			foreach (MapUnit unit in controller.units) {
-				Console.WriteLine($"{unit}, path length: {unit.path?.PathLength() ?? 0}");
+				Console.WriteLine($"{unit}, path length: {unit.path.PathLength()}");
 				if (unit.path?.PathLength() > 0) {
 					unit.moveAlongPath();
 				}
