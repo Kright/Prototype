@@ -58,7 +58,7 @@ jobs:
         godot -v --export${DEBUG_BUILD} "Windows Desktop" ../build/${FOLDER_NAME}/${EXPORT_NAME}.exe
     - name: Copy Static Files
       run: |
-        if cp ${EXPORT_NAME}/c7-static-map-save.json build/${FOLDER_NAME}/ && cp ${EXPORT_NAME}/credits.txt build/${FOLDER_NAME}/  && cp ${EXPORT_NAME}/Title_Screen.jpg build/${FOLDER_NAME}/
+        if cp -r ${EXPORT_NAME} build/${FOLDER_NAME}
         then
           echo "successfully copied static files to build"
         else
